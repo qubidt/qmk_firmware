@@ -5,6 +5,7 @@ BOOTMAGIC_ENABLE = lite     # Enable Bootmagic Lite
 ENCODER_ENABLE = yes
 RGB_MATRIX_ENABLE = yes
 CONSOLE_ENABLE = yes
+STARTUP_NUMLOC_ON = yes
 
 
 SRC += qubidt.c
