@@ -1,0 +1,24 @@
+VIA_ENABLE = yes
+MOUSEKEY_ENABLE = no
+TAP_DANCE_ENABLE = yes
+BOOTMAGIC_ENABLE = lite     # Enable Bootmagic Lite
+
+TD_LSFT_CAPSLOCK_ENABLE = no
+IDLE_TIMEOUT_ENABLE = yes
+STARTUP_NUMLOCK_ON = yes
+
+ENCODER_ENABLE = yes
+
+SRC += qubidt.c
+ifeq ($(strip $(ENCODER_DEFAULTACTIONS_ENABLE)), yes)
+    OPT_DEFS += -DENCODER_DEFAULTACTIONS_ENABLE
+endif
+ifeq ($(strip $(TD_LSFT_CAPSLOCK_ENABLE)), yes)
+    OPT_DEFS += -DTD_LSFT_CAPSLOCK_ENABLE
+endif
+ifeq ($(strip $(IDLE_TIMEOUT_ENABLE)), yes)
+    OPT_DEFS += -DIDLE_TIMEOUT_ENABLE
+endif
+ifeq ($(strip $(STARTUP_NUMLOCK_ON)), yes)
+    OPT_DEFS += -DSTARTUP_NUMLOCK_ON
+endif
