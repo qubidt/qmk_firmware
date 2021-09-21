@@ -17,6 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+#include <stdbool.h>
+#include <stdint.h>
+#include "quantum/quantum_keycodes.h"
+
 // DEFINE MACROS
 #define ARRAYSIZE(arr)  sizeof(arr)/sizeof(arr[0])
 

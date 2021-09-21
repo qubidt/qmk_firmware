@@ -182,49 +182,55 @@ __attribute__ ((weak))  bool process_record_keymap(uint16_t keycode, keyrecord_t
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_record_keymap(keycode, record)) { return false; }
-     switch (keycode) {
-    case KC_00:
-        if (record->event.pressed) {
-            // when keycode KC_00 is pressed
-            SEND_STRING("00");
-        } else unregister_code16(keycode);
-        break;
-    case KC_WINLCK:
-        if (record->event.pressed) {
-            keymap_config.no_gui = !keymap_config.no_gui; //toggle status
-        } else  unregister_code16(keycode);
-        break;
+
+    switch (keycode) {
+        case KC_00:
+            if (record->event.pressed) {
+                // when keycode KC_00 is pressed
+                SEND_STRING("00");
+            } else unregister_code16(keycode);
+            break;
+
+        case KC_WINLCK:
+            if (record->event.pressed) {
+                keymap_config.no_gui = !keymap_config.no_gui; //toggle status
+            } else  unregister_code16(keycode);
+            break;
 
 #ifdef IDLE_TIMEOUT_ENABLE
-    case RGB_TOI:
-        if(record->event.pressed) {
-            timeout_update_threshold(true);
-        } else  unregister_code16(keycode);
-        break;
-    case RGB_TOD:
-        if(record->event.pressed) {
-             timeout_update_threshold(false);  //decrease timeout
-        } else  unregister_code16(keycode);
-        break;
+        case RGB_TOI:
+            if(record->event.pressed) {
+                timeout_update_threshold(true);
+            } else  unregister_code16(keycode);
+            break;
+
+        case RGB_TOD:
+            if(record->event.pressed) {
+                 timeout_update_threshold(false);  //decrease timeout
+            } else  unregister_code16(keycode);
+            break;
 #endif // IDLE_TIMEOUT_ENABLE
+
 #ifdef RGB_MATRIX_ENABLE
-    case RGB_NITE:
-        if(record->event.pressed) {
-            rgb_nightmode = !rgb_nightmode;
-        } else  unregister_code16(keycode);
-        break;
+        case RGB_NITE:
+            if(record->event.pressed) {
+                rgb_nightmode = !rgb_nightmode;
+            } else  unregister_code16(keycode);
+            break;
 #endif // RGB_MATRIX_ENABLE
-    default:
-        if (record->event.pressed) {
-            #ifdef RGB_MATRIX_ENABLE
-                rgb_matrix_enable();
-            #endif
-            #ifdef IDLE_TIMEOUT_ENABLE
-                timeout_reset_timer();  //reset activity timer
-            #endif
-        }
-        break;
+
+        default:
+            if (record->event.pressed) {
+                #ifdef RGB_MATRIX_ENABLE
+                    rgb_matrix_enable();
+                #endif
+                #ifdef IDLE_TIMEOUT_ENABLE
+                    timeout_reset_timer();  //reset activity timer
+                #endif
+            }
+            break;
     }
+
     return true;
 };
 
